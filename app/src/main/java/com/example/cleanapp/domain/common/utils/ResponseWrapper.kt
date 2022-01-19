@@ -1,7 +1,7 @@
 package com.example.cleanapp.domain.common.utils
 
 data class WrappedListResponse<T>(
-    val code: Int,
+    var code: Int,
     val status: Boolean,
     val message: String,
     val errors: List<String>? = null,
@@ -9,7 +9,7 @@ data class WrappedListResponse<T>(
 )
 
 data class WrappedResponse<T>(
-    val code: Int,
+    var code: Int,
     val status: Boolean,
     val message: String,
     val errors: List<String>? = null,
