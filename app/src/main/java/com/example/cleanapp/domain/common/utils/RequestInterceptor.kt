@@ -1,4 +1,4 @@
-package com.example.cleanapp.domain.module
+package com.example.cleanapp.domain.common.utils
 
 import com.example.cleanapp.common.utils.SharedPref
 import okhttp3.Interceptor

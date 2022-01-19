@@ -1,4 +1,4 @@
-package com.example.cleanapp.domain.module
+package com.example.cleanapp.domain.common.module
 
 import android.content.Context
 import com.example.cleanapp.common.utils.SharedPref

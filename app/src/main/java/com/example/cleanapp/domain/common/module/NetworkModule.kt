@@ -1,7 +1,8 @@
-package com.example.cleanapp.domain.module
+package com.example.cleanapp.domain.common.module
 
 import com.example.cleanapp.common.Constants
 import com.example.cleanapp.common.utils.SharedPref
+import com.example.cleanapp.domain.common.utils.RequestInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,7 +39,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideRequestInterceptor(prefs: SharedPref) : RequestInterceptor{
+    fun provideRequestInterceptor(prefs: SharedPref) : RequestInterceptor {
         return RequestInterceptor(prefs)
     }
 }
