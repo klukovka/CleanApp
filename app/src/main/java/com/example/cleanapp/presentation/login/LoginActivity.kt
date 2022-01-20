@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.cleanapp.R
 import com.example.cleanapp.data.login.remote.dto.LoginRequest
+import com.example.cleanapp.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
