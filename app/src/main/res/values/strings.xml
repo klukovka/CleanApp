@@ -8,4 +8,10 @@
     <string name="i_dont_have_an_account">I don\'t have an account</string>
     <string name="error_password_not_valid">Password should be longer then 8 characters</string>
     <string name="error_email_not_valid">Email is not valid</string>
+    <string name="go_back">Go back</string>
+    <string name="header_register">Create account</string>
+    <string name="header_register_desc">Create account to get all the feature og this app</string>
+    <string name="name_hint">Your full name</string>
+    <string name="create_account_button_text">Create account</string>
+    <string name="error_name_not_valid">Name should not be empty</string>
 </resources>

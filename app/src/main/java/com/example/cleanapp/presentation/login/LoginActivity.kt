@@ -3,6 +3,7 @@ package com.example.cleanapp.presentation.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -18,6 +19,7 @@ import com.example.cleanapp.databinding.ActivityLoginBinding
 import com.example.cleanapp.domain.common.utils.WrappedResponse
 import com.example.cleanapp.domain.entity.LoginEntity
 import com.example.cleanapp.presentation.main.MainActivity
+import com.example.cleanapp.presentation.register.RegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -34,13 +36,27 @@ class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var prefs : SharedPref
 
+    private val openRegisterActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        result ->
+        if (result.resultCode == RESULT_OK){
+            goToMainActivity()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //TODO: Maybe remove
         login()
+        goToRegisterActivity()
         observe()
+    }
+
+    private fun goToRegisterActivity(){
+        binding.registerButton.setOnClickListener{
+            openRegisterActivity.launch(Intent(this@LoginActivity,
+                RegisterActivity::class.java))
+        }
     }
 
     private fun observe(){
@@ -61,6 +77,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handleLoadingState(isLoading : Boolean){
         binding.loginButton.isEnabled = !isLoading
+        binding.registerButton.isEnabled = !isLoading
         binding.loadingProgressBar.isIndeterminate = isLoading
 
         if (!isLoading){

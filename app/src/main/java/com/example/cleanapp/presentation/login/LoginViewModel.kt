@@ -39,6 +39,10 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
         _state.value = LoginActivityState.ErrorLogin(loginResponse)
     }
 
+    private fun init(){
+        _state.value = LoginActivityState.Init
+    }
+
     fun login(loginRequest: LoginRequest){
         viewModelScope.launch {
             loginUseCase.invoke(loginRequest)
@@ -53,7 +57,10 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
                     hideLoading()
                     when(result){
                         is BaseResult.Success -> successLogin(result.data)
-                        is BaseResult.Error -> errorLogin(result.rawResponse)
+                        is BaseResult.Error -> {
+                            errorLogin(result.rawResponse)
+                            init()
+                        }
                     }
                 }
         }
