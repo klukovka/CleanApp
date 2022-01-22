@@ -73,5 +73,4 @@ sealed class LoginActivityState {
     data class ShowToast(val message: String) : LoginActivityState()
     data class SuccessLogin(val loginEntity: LoginEntity) : LoginActivityState()
     data class ErrorLogin(val loginResponse: WrappedResponse<LoginResponse>) : LoginActivityState()
-
 }
