@@ -49,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         login()
         goToRegisterActivity()
+        goToMainActivity()
         observe()
     }
 
@@ -91,8 +92,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToMainActivity(){
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        if (prefs.getToken().isNotEmpty()) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 
     private fun handleErrorState(rawResponse : WrappedResponse<LoginResponse>){
