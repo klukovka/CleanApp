@@ -126,18 +126,16 @@ class LoginActivity : AppCompatActivity() {
     private fun validate(email: String?, password: String?): Boolean {
         resetAllError()
 
-        var isValid = false;
+        var isValid = true;
 
-        if (email?.isEmail() != false) {
-            isValid = true;
-        } else {
+        if (email?.isEmail() == false) {
             setEmailError(getString(R.string.error_email_not_valid))
+            isValid = false
         }
 
         if (password?.length ?:0 < 8) {
             setPasswordError(getString(R.string.error_password_not_valid))
-        } else {
-            isValid = true;
+            isValid = false
         }
 
         return isValid;

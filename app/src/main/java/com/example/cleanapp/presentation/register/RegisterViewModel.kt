@@ -75,5 +75,5 @@ sealed class RegisterActivityState {
     data class IsLoading(val isLoading: Boolean) : RegisterActivityState()
     data class ShowToast(val message: String) : RegisterActivityState()
     data class SuccessRegister(val registerEntity: RegisterEntity) : RegisterActivityState()
-    data class ErrorRegister(val loginResponse: WrappedResponse<RegisterResponse>) : RegisterActivityState()
+    data class ErrorRegister(val registerResponse: WrappedResponse<RegisterResponse>) : RegisterActivityState()
 }
