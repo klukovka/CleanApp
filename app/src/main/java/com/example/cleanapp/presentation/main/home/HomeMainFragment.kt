@@ -3,7 +3,6 @@ package com.example.cleanapp.presentation.main.home
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.activity.viewModels
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
