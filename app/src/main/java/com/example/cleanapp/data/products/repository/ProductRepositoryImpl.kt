@@ -33,6 +33,8 @@ class ProductRepositoryImpl @Inject constructor(private val productApi : Product
                     products.add(ProductEntity(product.id, product.price, product.productName, user))
                 }
 
+                emit(BaseResult.Success(products))
+
             } else {
                 val type = object : TypeToken<WrappedListResponse<ProductResponse>>(){}.type
                 val error : WrappedListResponse<ProductResponse> =
@@ -44,19 +46,93 @@ class ProductRepositoryImpl @Inject constructor(private val productApi : Product
     }
 
     override suspend fun getProductById(id: String): Flow<BaseResult<ProductEntity, WrappedResponse<ProductResponse>>> {
-        TODO("Not yet implemented")
+        return flow {
+            var response = productApi.getProductById(id)
+
+            if (response.isSuccessful){
+                val data = response.body()?.data!!
+
+                val userEntity = ProductUserEntity(data.user.email, data.user.id, data.user.name)
+
+                val product = ProductEntity(data.id, data.price, data.productName, userEntity)
+
+                emit(BaseResult.Success(product))
+
+            } else {
+                val type = object : TypeToken<WrappedResponse<ProductResponse>>(){}.type
+                val error : WrappedResponse<ProductResponse> =
+                    Gson().fromJson(response.errorBody()!!.charStream(), type)!!
+                error.code = response.code()
+                emit(BaseResult.Error(error))
+            }
+        }
     }
 
-    override suspend fun updateProduct(productUpdateRequest: ProductUpdateRequest): Flow<BaseResult<ProductEntity, WrappedResponse<ProductResponse>>> {
-        TODO("Not yet implemented")
+    override suspend fun updateProduct(
+        productUpdateRequest: ProductUpdateRequest,
+        id: String
+    ): Flow<BaseResult<ProductEntity, WrappedResponse<ProductResponse>>> {
+        return flow {
+            var response = productApi.updateProduct(id, productUpdateRequest)
+
+            if (response.isSuccessful){
+                val data = response.body()?.data!!
+
+                val userEntity = ProductUserEntity(data.user.email, data.user.id, data.user.name)
+
+                val product = ProductEntity(data.id, data.price, data.productName, userEntity)
+
+                emit(BaseResult.Success(product))
+
+            } else {
+                val type = object : TypeToken<WrappedResponse<ProductResponse>>(){}.type
+                val error : WrappedResponse<ProductResponse> =
+                    Gson().fromJson(response.errorBody()!!.charStream(), type)!!
+                error.code = response.code()
+                emit(BaseResult.Error(error))
+            }
+        }
     }
 
     override suspend fun deleteProduct(id: String): Flow<BaseResult<Unit, WrappedResponse<ProductResponse>>> {
-        TODO("Not yet implemented")
+        return flow {
+            var response = productApi.deleteProduct(id)
+
+            if (response.isSuccessful){
+
+                emit(BaseResult.Success(Unit))
+
+            } else {
+                val type = object : TypeToken<WrappedResponse<ProductResponse>>(){}.type
+                val error : WrappedResponse<ProductResponse> =
+                    Gson().fromJson(response.errorBody()!!.charStream(), type)!!
+                error.code = response.code()
+                emit(BaseResult.Error(error))
+            }
+        }
     }
 
     override suspend fun createProduct(productCreateRequest: ProductCreateRequest): Flow<BaseResult<ProductEntity, WrappedResponse<ProductResponse>>> {
-        TODO("Not yet implemented")
+        return flow {
+            var response = productApi.createProduct(productCreateRequest)
+
+            if (response.isSuccessful){
+                val data = response.body()?.data!!
+
+                val userEntity = ProductUserEntity(data.user.email, data.user.id, data.user.name)
+
+                val product = ProductEntity(data.id, data.price, data.productName, userEntity)
+
+                emit(BaseResult.Success(product))
+
+            } else {
+                val type = object : TypeToken<WrappedResponse<ProductResponse>>(){}.type
+                val error : WrappedResponse<ProductResponse> =
+                    Gson().fromJson(response.errorBody()!!.charStream(), type)!!
+                error.code = response.code()
+                emit(BaseResult.Error(error))
+            }
+        }
     }
 
 }

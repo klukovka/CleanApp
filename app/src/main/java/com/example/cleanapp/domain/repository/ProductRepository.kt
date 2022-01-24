@@ -16,7 +16,7 @@ interface ProductRepository {
     suspend fun getProductById(id: String)
             : Flow<BaseResult<ProductEntity, WrappedResponse<ProductResponse>>>
 
-    suspend fun updateProduct(productUpdateRequest: ProductUpdateRequest)
+    suspend fun updateProduct(productUpdateRequest: ProductUpdateRequest, id: String)
             : Flow<BaseResult<ProductEntity, WrappedResponse<ProductResponse>>>
 
     suspend fun deleteProduct(id: String)
