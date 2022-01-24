@@ -121,5 +121,4 @@ sealed class DataMainFragmentState{
     data class ShowToast(val message: String) : DataMainFragmentState()
     object SuccessDelete : DataMainFragmentState()
     object SuccessUpdate : DataMainFragmentState()
-
 }

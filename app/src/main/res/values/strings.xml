@@ -21,4 +21,8 @@
     <string name="button_text_delete">Delete</string>
     <string name="product_name_not_valid">Product name not valid</string>
     <string name="product_price_not_valid">Product price not valid</string>
+    <string name="button_text_create">Create</string>
+    <string name="all_products">All Products</string>
+    <string name="product_details">Product Details</string>
+    <string name="create_product">Create Product</string>
 </resources>

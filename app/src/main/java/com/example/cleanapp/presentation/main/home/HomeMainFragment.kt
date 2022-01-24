@@ -35,6 +35,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         setupRecyclerView()
         observe()
         fetchMyProducts()
+        create()
     }
 
     private fun fetchMyProducts(){
@@ -52,6 +53,12 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         binding.productRecyclerView.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireActivity())
+        }
+    }
+
+    private fun create(){
+        binding.createTabButton.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_create)
         }
     }
 
