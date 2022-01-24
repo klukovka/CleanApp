@@ -12,7 +12,10 @@ class HomeProductAdapter (private val products: MutableList<ProductEntity>) :
     inner class ViewHolder(private val itemBinding : ItemProductBinding) :
             RecyclerView.ViewHolder(itemBinding.root){
                 fun bind(product: ProductEntity){
-                    //TODO("Not yet implemented")
+                    itemBinding.productName.text = product.name
+                    itemBinding.root.setOnClickListener {
+                        onTapListener?.onTap(product)
+                    }
                 }
             }
 
