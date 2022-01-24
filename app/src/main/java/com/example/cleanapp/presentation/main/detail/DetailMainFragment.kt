@@ -84,6 +84,12 @@ class DetailMainFragment : Fragment(R.layout.fragment_detail_main) {
     private fun handleLoadingState(isLoading : Boolean){
         binding.updateButton.isEnabled = !isLoading
         binding.deleteButton.isEnabled = !isLoading
+
+        binding.loadingProgressBar.isIndeterminate = isLoading
+
+        if (!isLoading){
+            binding.loadingProgressBar.progress = 0
+        }
     }
 
     private fun update(){
